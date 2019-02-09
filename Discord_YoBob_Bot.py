@@ -43,7 +43,7 @@ async def on_message(message):
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
         embed = discord.Embed(title="Sleep 상태에서 제한된 명령어입니다.", description="나중에 다시 시도해 주세요.", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
-        await client.send_message(client.get_channel('message.channel'), embed=embed)
+        await client.send_message(message.channel, embed=embed)
         
 
 
@@ -53,7 +53,7 @@ async def on_message(message):
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
         embed = discord.Embed(title="Sleep 상태에서 제한된 명령어입니다.", description="나중에 다시 시도해 주세요.", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
-        await client.send_message(client.get_channel('message.channel'), embed=embed)
+        await client.send_message(message.channel, embed=embed)
 
 
 
@@ -61,8 +61,11 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        embed = discord.Embed(title="1.2.0 변경 사항", description="``/주사위`` 명령어는 이제 ``/게임 주사위`` 또는 ``/겜 주사위`` 명령어로 사용할 수 있습니다.\n``/게임 주사위`` 명령어의 재사용 대기시간을 0초에서 180초로 변경하였습니다."
-                                                              "\n이제 ``/게임 주사위`` 명령어를 통해 점수를 획득할 수 있습니다.\n``/게임 가위바위보``명령어를 통한 점수 변동이 기존 1점에서 10점으로 변경하였습니다.\n처음 점수 설정이 50점에서 500점으로 변경하였습니다.", color=0x0000ff)
+        file = open('log.txt', 'a', encoding='UTF-8')
+        file.write('\n   \n[Channel]: %s(%s) | [uthor]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
+        embed = discord.Embed(title="1.2.0 변경 사항", description="**이제 봇이 새벽 시간대에 꺼지는 대신 Sleep 상태가 적용되어 24시간 가동됩니다.**\n**Sleep 상태에서는 일부 명령어를 사용할 수 없습니다.**\n이제 금지어 사용 시 출력되는 경고 메시지에 채널이 기록됩니다."
+                                                              "\n이제 금지어 사용 시 출력되는 경고 메시지는 금지어가 사용 된 채널에 전송되지 않으며 경고는 <@150577293981515776>의 확인 및 판단 후에 누적 또는 기각됩니다.\n금지어 사용 시 출력되는 경고 메시지에 반응이 추가되도록 변경하였습니다."
+                                                              "\n``/게임 주사위`` 명령어의 재사용 대기시간을 180초에서 150초로 변경하였습니다.\n이제 ``/ㅂㅅㄱ`` 명령어를 ``/ㅄㄱ``으로도 사용할 수 있습니다.", color=0x0000ff)
         await client.send_message(message.channel, embed=embed)
 
 
@@ -73,7 +76,7 @@ async def on_message(message):
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
         embed = discord.Embed(title="Sleep 상태에서 제한된 명령어입니다.", description="나중에 다시 시도해 주세요.", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
-        await client.send_message(client.get_channel('message.channel'), embed=embed)
+        await client.send_message(message.channel, embed=embed)
 
 
 
@@ -98,17 +101,17 @@ async def on_message(message):
                                                               "``/?`` ``/도움`` ``/헬프`` ``/핼프`` ``/커맨드`` ``/명령어`` ``/help`` ``/h`` ``/command``\n사용 가능한 명령어 목록을 보여줍니다.\n\n"
                                                               "``/개발용도움`` ``/개발용헬프`` ``/개발용핼프`` ``/help d`` ``/hd``\n개발용 명령어 목록을 보여줍니다.\n\n"
                                                               "``/검색 (텍스트)`` ``/서치 (텍스트)`` ``/search (텍스트)``\nGoogle에서 이미지를 불러옵니다. (텍스트)에 공백이 없어야 정상 작동합니다.\n\n"
-                                                              "``/게임`` ``/겜`` ``/game`` ``/g``\n~~현재 게임 점수를 보여줍니다.~~ Sleep 상태에서 제한 됨.\n\n"
-                                                              "``/게임 가위바위보`` ``/겜 가위바위보`` ``/game rps`` ``/g rps``\n~~가위바위보 게임을 진행합니다.~~ Sleep 상태에서 제한 됨.\n\n"
-                                                              "``/게임 주사위`` ``/게임 다이스`` ``/겜 주사위`` ``/겜 다이스`` ``/game dice`` ``/g dice``\n~~주사위를 굴립니다.~~ Sleep 상태에서 제한 됨.\n\n"
-                                                              "``/경고기록 (유저 ID)`` ``/경고조회 (유저 ID)`` ``/warn (유저 ID)``\n~~(유저 ID)의 경고 기록을 조회합니다.~~ 개발중인 항목\n\n"
+                                                              "``/게임`` ``/겜`` ``/game`` ``/g``\n~~현재 게임 점수를 보여줍니다.~~ **Sleep 상태에서 제한 됨.**\n\n"
+                                                              "``/게임 가위바위보`` ``/겜 가위바위보`` ``/game rps`` ``/g rps``\n~~가위바위보 게임을 진행합니다.~~ **Sleep 상태에서 제한 됨.**\n\n"
+                                                              "``/게임 주사위`` ``/게임 다이스`` ``/겜 주사위`` ``/겜 다이스`` ``/game dice`` ``/g dice``\n~~주사위를 굴립니다.~~ **Sleep 상태에서 제한 됨.**\n\n"
+                                                              "``/경고기록 (유저 ID)`` ``/경고조회 (유저 ID)`` ``/warn (유저 ID)``\n~~(유저 ID)의 경고 기록을 조회합니다.~~ **개발중인 항목**\n\n"
                                                               "``/명언`` ``/wisesaying``\n명언을 남깁니다.\n\n"
                                                               "``/변경사항`` ``/체인지로그`` ``/changelog`` ``/cl``\n최근 변경 사항을 보여줍니다.\n\n"
                                                               "``/봇소개`` ``/whoareyou``\n봇의 소개를 보여줍니다.\n\n"
                                                               "``/시간`` ``/타임`` ``/time``\n현재 시간을 보여줍니다.\n\n"
                                                               "``/언급`` ``/멘션`` ``/mention``\n명령어를 사용한 유저에게 언급합니다.\n\n"
                                                               "``/엔타로아둔`` ``/entaroadun``\n인사를 합니다.\n\n"
-                                                              "```ini\n[ 한글 명령어는 초성으로도 사용 가능합니다. ]\n```\n\n"
+                                                              "```ini\n[ 한글 명령어는 초성으로도 사용 가능합니다. (검색 제외) ]\n```\n\n"
                                                               , color=0x00ff00)
         await client.send_message(message.channel, embed=embed)
 
