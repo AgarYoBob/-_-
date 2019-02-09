@@ -22,9 +22,6 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print("-------------------------\n")
-    file = open('log.txt', 'a', encoding='UTF-8')
-    file.write('\n\n==================================================\n')
-    file.write('\n[Run Bot]\n')
     await client.change_presence(game=discord.Game(name='/?을(를) 입력하여 명령어 확인          ', type=0))
 
 
@@ -44,22 +41,9 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [Author]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
-        file = openpyxl.load_workbook("player_list.xlsx")
-        sheet = file.active
-        for i in range(1, 129):
-            if str(sheet["A" + str(i)].value) == str(message.author.id):
-                embed = discord.Embed(title="현재 점수", description="현재 <@" + message.author.id + ">님의 점수는 " + str(sheet["B" + str(i)].value) + "점 입니다.", color=0x00ff00)
-                msg = await client.send_message(message.channel, embed=embed)
-                break
-            if str(sheet["A" + str(i)].value) == "-":
-                sheet["A" + str(i)].value = str(message.author.id)
-                sheet["B" + str(i)].value = 500
-                embed = discord.Embed(title="현재 점수", description="현재 <@" + message.author.id + ">님의 점수는 " + str(sheet["B" + str(i)].value) + "점 입니다.", color=0x00ff00)
-                await client.send_message(message.channel, embed=embed)
-                break
-        file.save("player_list.xlsx")
+        embed = discord.Embed(title="Sleep 상태에서 제한된 명령어입니다.", description="나중에 다시 시도해 주세요.", color=0x0000ff)
+        embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+        await client.send_message(client.get_channel('message.channel'), embed=embed)
         
 
 
@@ -67,50 +51,9 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [Author]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
-        file = openpyxl.load_workbook("player_list.xlsx")
-        sheet = file.active
-        member = discord.utils.get(client.get_all_members())
-        for i in range(1, 129):
-            if str(sheet["A" + str(i)].value) == str(message.author.id):
-                j = randint(1, 3)
-                embed = discord.Embed(title="가위바위보", description="아래 중 하나를 선택하세요.", color=0x00ff00)
-                embed.set_footer(text="제한시간: 5초")
-                msg = await client.send_message(message.channel, embed=embed)
-                await client.add_reaction(msg, '✊')
-                await client.add_reaction(msg, '✌')
-                await client.add_reaction(msg, '✋')
-                res = await client.wait_for_reaction(['✊', '✌', '✋'], user=message.author, timeout=5,message=msg)
-                if res is None:
-                    embed = discord.Embed(title="삐빅-", description="시간초과!", color=0x00ff00)
-                    await client.send_message(message.channel, embed=embed)
-                    return
-                else:
-                    await client.send_message(message.channel,'플레이어 <@' + message.author.id + '>의 선택은 {0.reaction.emoji}입니다!'.format(res))
-                    if j == 1:
-                        sheet["B" + str(i)].value = int(sheet["B" + str(i)].value) + 10
-                        embed = discord.Embed(title="결과", description="승리했습니다!", color=0x00ff00)
-                        embed.set_footer(text="현재 점수: " + str(sheet["B" + str(i)].value))
-                        await client.send_message(message.channel, embed=embed)
-                    if j == 2:
-                        embed = discord.Embed(title="결과", description="무승부입니다!", color=0x00ff00)
-                        embed.set_footer(text="현재 점수: " + str(sheet["B" + str(i)].value))
-                        await client.send_message(message.channel, embed=embed)
-                    if j == 3:
-                        sheet["B" + str(i)].value = int(sheet["B" + str(i)].value) - 10
-                        embed = discord.Embed(title="결과", description="패배했습니다!", color=0x00ff00)
-                        embed.set_footer(text="현재 점수: " + str(sheet["B" + str(i)].value))
-                        await client.send_message(message.channel, embed=embed)
-                    break
-            if str(sheet["A" + str(i)].value) == "-":
-                sheet["A" + str(i)].value = str(message.author.id)
-                sheet["B" + str(i)].value = 500
-                embed = discord.Embed(title="알림", description="플레이어 (<@" + message.author.id + ">)의 이전 게임 진행 기록을 찾을 수 없습니다.\n처음 설정인 점수 500점을 지급합니다. 이제, 다시 시도해 보세요. :)\n", color=0x00ff00)
-                embed.set_footer(text="현재 점수: 500")
-                await client.send_message(message.channel, embed=embed)
-                break
-        file.save("player_list.xlsx")
+        embed = discord.Embed(title="Sleep 상태에서 제한된 명령어입니다.", description="나중에 다시 시도해 주세요.", color=0x0000ff)
+        embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+        await client.send_message(client.get_channel('message.channel'), embed=embed)
 
 
 
@@ -118,9 +61,7 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [uthor]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
-        embed = discord.Embed(title="1.1.1 변경 사항", description="``/주사위`` 명령어는 이제 ``/게임 주사위`` 또는 ``/겜 주사위`` 명령어로 사용할 수 있습니다.\n``/게임 주사위`` 명령어의 재사용 대기시간을 0초에서 180초로 변경하였습니다."
+        embed = discord.Embed(title="1.2.0 변경 사항", description="``/주사위`` 명령어는 이제 ``/게임 주사위`` 또는 ``/겜 주사위`` 명령어로 사용할 수 있습니다.\n``/게임 주사위`` 명령어의 재사용 대기시간을 0초에서 180초로 변경하였습니다."
                                                               "\n이제 ``/게임 주사위`` 명령어를 통해 점수를 획득할 수 있습니다.\n``/게임 가위바위보``명령어를 통한 점수 변동이 기존 1점에서 10점으로 변경하였습니다.\n처음 점수 설정이 50점에서 500점으로 변경하였습니다.", color=0x0000ff)
         await client.send_message(message.channel, embed=embed)
 
@@ -130,73 +71,9 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [uthor]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
-
-        file = openpyxl.load_workbook("dice_cooldown_list.xlsx")
-        sheet = file.active
-        for i in range(1, 129):
-            if sheet["A" + str(i)].value == message.author.id:
-                if int(sheet["B" + str(i)].value) <= int(datetime.datetime.today().strftime("%Y%m%d%H%M%S")):
-                    dicecooldown = datetime.datetime.today() + datetime.timedelta(seconds=180)
-                    file.active["B" + str(i)].value = dicecooldown.strftime("%Y%m%d%H%M%S")
-                    file.save("dice_cooldown_list.xlsx")
-                    dicecnt = 0
-                else:
-                    tc = str(int(str(sheet["B" + str(i)].value)) - int(datetime.datetime.today().strftime("%Y%m%d%H%M%S")))
-                    embed = discord.Embed(title="재사용 대기중입니다.", description=str(sheet["C" + str(i)].value) + " 이후에 다시 시도하세요.", color=0x00ff00)
-                    await client.send_message(message.channel, embed=embed)
-                    dicecnt = 1
-                break
-            if sheet["A" + str(i)].value == "-":
-                sheet["A" + str(i)].value = message.author.id
-                dicecooldown = datetime.datetime.today() + datetime.timedelta(seconds=180)
-                file.active["B" + str(i)].value = dicecooldown.strftime("%Y%m%d%H%M%S")
-                file.active["C" + str(i)].value = dicecooldown
-                file.save("dice_cooldown_list.xlsx")
-                dicecnt = 0
-                break
-        if dicecnt == 0:
-            file = openpyxl.load_workbook("player_list.xlsx")
-            sheet = file.active
-            for i in range(1, 129):
-                if str(sheet["A" + str(i)].value) == str(message.author.id):
-                    j = randint(1, 6)
-                    sheet["B" + str(i)].value = int(sheet["B" + str(i)].value) + j
-                    if j == 1:
-                        embed = discord.Embed(title="주사위를 굴린 결과", description=':game_die: ' + ':one: ' + " ⚀", color=0x00ff00)
-                        embed.set_footer(text="현재 점수: " + str(sheet["B" + str(i)].value))
-                        await client.send_message(message.channel, embed=embed)
-                    if j == 2:
-                        embed = discord.Embed(title="주사위를 굴린 결과", description=':game_die: ' + ':two: ' + " ⚁", color=0x00ff00)
-                        embed.set_footer(text="현재 점수: " + str(sheet["B" + str(i)].value))
-                        await client.send_message(message.channel, embed=embed)
-                    if j == 3:
-                        embed = discord.Embed(title="주사위를 굴린 결과", description=':game_die: ' + ':three: ' + " ⚂", color=0x00ff00)
-                        embed.set_footer(text="현재 점수: " + str(sheet["B" + str(i)].value))
-                        await client.send_message(message.channel, embed=embed)
-                    if j == 4:
-                        embed = discord.Embed(title="주사위를 굴린 결과", description=':game_die: ' + ':four: ' + " ⚃", color=0x00ff00)
-                        embed.set_footer(text="현재 점수: " + str(sheet["B" + str(i)].value))
-                        await client.send_message(message.channel, embed=embed)
-                    if j == 5:
-                        embed = discord.Embed(title="주사위를 굴린 결과", description=':game_die: ' + ':five: ' + " ⚄", color=0x00ff00)
-                        embed.set_footer(text="현재 점수: " + str(sheet["B" + str(i)].value))
-                        await client.send_message(message.channel, embed=embed)
-                    if j == 6:
-                        embed = discord.Embed(title="주사위를 굴린 결과", description=':game_die: ' + ':six: ' + " ⚅", color=0x00ff00)
-                        embed.set_footer(text="현재 점수: " + str(sheet["B" + str(i)].value))
-                        await client.send_message(message.channel, embed=embed)
-                    del i
-                    break
-                if str(sheet["A" + str(i)].value) == "-":
-                    sheet["A" + str(i)].value = str(message.author.id)
-                    sheet["B" + str(i)].value = 500
-                    embed = discord.Embed(title="알림", description="플레이어 <@" + message.author.id + ">의 이전 게임 진행 기록을 찾을 수 없습니다.\n처음 설정인 점수 500점을 지급합니다. 이제, 다시 시도해 보세요. :)\n", color=0x00ff00)
-                    embed.set_footer(text="현재 점수: 500")
-                    await client.send_message(message.channel, embed=embed)
-                    break
-            file.save("player_list.xlsx")
+        embed = discord.Embed(title="Sleep 상태에서 제한된 명령어입니다.", description="나중에 다시 시도해 주세요.", color=0x0000ff)
+        embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+        await client.send_message(client.get_channel('message.channel'), embed=embed)
 
 
 
@@ -221,9 +98,9 @@ async def on_message(message):
                                                               "``/?`` ``/도움`` ``/헬프`` ``/핼프`` ``/커맨드`` ``/명령어`` ``/help`` ``/h`` ``/command``\n사용 가능한 명령어 목록을 보여줍니다.\n\n"
                                                               "``/개발용도움`` ``/개발용헬프`` ``/개발용핼프`` ``/help d`` ``/hd``\n개발용 명령어 목록을 보여줍니다.\n\n"
                                                               "``/검색 (텍스트)`` ``/서치 (텍스트)`` ``/search (텍스트)``\nGoogle에서 이미지를 불러옵니다. (텍스트)에 공백이 없어야 정상 작동합니다.\n\n"
-                                                              "``/게임`` ``/겜`` ``/game`` ``/g``\n현재 게임 점수를 보여줍니다.\n\n"
-                                                              "``/게임 가위바위보`` ``/겜 가위바위보`` ``/game rps`` ``/g rps``\n가위바위보 게임을 진행합니다.\n\n"
-                                                              "``/게임 주사위`` ``/게임 다이스`` ``/겜 주사위`` ``/겜 다이스`` ``/game dice`` ``/g dice``\n주사위를 굴립니다.\n\n"
+                                                              "``/게임`` ``/겜`` ``/game`` ``/g``\n~~현재 게임 점수를 보여줍니다.~~ Sleep 상태에서 제한 됨.\n\n"
+                                                              "``/게임 가위바위보`` ``/겜 가위바위보`` ``/game rps`` ``/g rps``\n~~가위바위보 게임을 진행합니다.~~ Sleep 상태에서 제한 됨.\n\n"
+                                                              "``/게임 주사위`` ``/게임 다이스`` ``/겜 주사위`` ``/겜 다이스`` ``/game dice`` ``/g dice``\n~~주사위를 굴립니다.~~ Sleep 상태에서 제한 됨.\n\n"
                                                               "``/경고기록 (유저 ID)`` ``/경고조회 (유저 ID)`` ``/warn (유저 ID)``\n~~(유저 ID)의 경고 기록을 조회합니다.~~ 개발중인 항목\n\n"
                                                               "``/명언`` ``/wisesaying``\n명언을 남깁니다.\n\n"
                                                               "``/변경사항`` ``/체인지로그`` ``/changelog`` ``/cl``\n최근 변경 사항을 보여줍니다.\n\n"
@@ -339,7 +216,7 @@ async def on_message(message):
             await client.send_message(client.get_channel('507932999573045259'), message.content[3:])
 
         if message.content == "/v":
-            await client.send_message(message.channel, "현재 버전은 ``1.1.1.0006 (r:33-190208)``입니다.")
+            await client.send_message(message.channel, "현재 버전은 ``1.2.0.0000 (r:39-190209)``입니다.")
 
         if message.content == "/pn" or message.content == "/pn s" or message.content == "/pn short":
             embed = discord.Embed(title="패치 노트\n", description="\n\n"
