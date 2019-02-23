@@ -208,6 +208,28 @@ async def on_message(message):
         
 
 
+    if message.author.id == '150577293981515776' or message.author.id == '311791989681291264':
+        if message.content == ".vote1":
+            embed = discord.Embed(title="1차 투표가 시작되었습니다." , description="재판에 올릴 플레이어를 지목하여 주세요.", color=0xff0000)
+            embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+            await client.send_message(client.get_channel('548548318830133278'), embed=embed)
+        if message.content == ".vote2":
+            embed = discord.Embed(title="2차 투표가 시작되었습니다." , description="재판에 올려진 플레이어에 대해 찬반 투표를 해주세요.", color=0xff0000)
+            embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+            member = discord.utils.get(client.get_all_members())
+            vote2 = await client.send_message(client.get_channel('548548318830133278'), embed=embed)
+            await client.add_reaction(vote2, '👍')
+            await client.add_reaction(vote2, '👎')
+        if message.content.startswith('.daytime '):
+            embed = discord.Embed(title=message.content[9:] + "번째 낮이 되었습니다." , description="이제 생존한 플레이어는 <#548548289222410241> 채널을 사용할 수 있습니다.", color=0xff0000)
+            embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+            await client.send_message(client.get_channel('548548289222410241'), embed=embed)
+        if message.content.startswith('.night '):
+            embed = discord.Embed(title=message.content[7:] + "번째 밤이 되었습니다." , description="이제 생존한 플레이어는 <#548548289222410241> 채널을 사용할 수 없습니다.", color=0xff0000)
+            embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+            await client.send_message(client.get_channel('548548289222410241'), embed=embed)
+
+
     if message.author.id == '150577293981515776':
         if message.content.startswith('/r '):
             await client.send_message(message.channel, message.content[3:])
