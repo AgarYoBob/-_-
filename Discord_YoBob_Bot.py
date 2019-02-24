@@ -29,15 +29,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.id != '542335761962237972' and message.channel.id != '542335831675764736':
-        now = datetime.datetime.now()
-        embed = discord.Embed(title=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)", description=message.content, color=0x00ff00)
-        embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
-        await client.send_message(client.get_channel('542335761962237972'), embed=embed)
-        
-
-
-    if message.content == "/game" or message.content == "/g" or message.content == "/게임" or message.content == "/ㄱㅇ" or message.content == "/겜" or message.content == "/ㄱ":
+    if message.content == "/게임" or message.content == "/ㄱㅇ" or message.content == "/겜" or message.content == "/ㄱ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -47,7 +39,7 @@ async def on_message(message):
         
 
 
-    if message.content == "/game rps" or message.content == "/g rps" or message.content == "/게임 가위바위보" or message.content == "/ㄱㅇ ㄱㅇㅂㅇㅂ" or message.content == "/겜 가위바위보" or message.content == "/ㄱ ㄱㅇㅂㅇㅂ":
+    if message.content == "/게임 가위바위보" or message.content == "/ㄱㅇ ㄱㅇㅂㅇㅂ" or message.content == "/겜 가위바위보" or message.content == "/ㄱ ㄱㅇㅂㅇㅂ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -57,7 +49,7 @@ async def on_message(message):
 
 
 
-    if message.content == "/changelog" or message.content == "/cl" or message.content == "/변경사항" or message.content == "/ㅂㄳㅎ" or message.content == "/ㅂㄱㅅㅎ" or message.content == "/체인지로그" or message.content == "/ㅊㅇㅈㄺ" or message.content == "/ㅊㅇㅈㄹㄱ":
+    if message.content == "/변경사항" or message.content == "/ㅂㄳㅎ" or message.content == "/ㅂㄱㅅㅎ" or message.content == "/체인지로그" or message.content == "/ㅊㅇㅈㄺ" or message.content == "/ㅊㅇㅈㄹㄱ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -68,7 +60,7 @@ async def on_message(message):
 
 
 
-    if message.content == "/game dice" or message.content == "/g dice" or message.content == "/게임 주사위" or message.content == "/ㄱㅇ ㅈㅅㅇ" or message.content == "/겜 주사위" or message.content == "/ㄱ ㅈㅅㅇ" or message.content == "/게임 다이스" or message.content == "/겜 다이스" or message.content == "/ㄱㅇ ㄷㅇㅅ" or message.content == "/ㄱ ㄷㅇㅅ":
+    if message.content == "/게임 주사위" or message.content == "/ㄱㅇ ㅈㅅㅇ" or message.content == "/겜 주사위" or message.content == "/ㄱ ㅈㅅㅇ" or message.content == "/게임 다이스" or message.content == "/겜 다이스" or message.content == "/ㄱㅇ ㄷㅇㅅ" or message.content == "/ㄱ ㄷㅇㅅ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -78,7 +70,7 @@ async def on_message(message):
 
 
 
-    if message.content == "/entaroadun" or message.content == "/엔타로아둔" or message.content == "/ㅇㅌㄹㅇㄷ":
+    if message.content == "/엔타로아둔" or message.content == "/ㅇㅌㄹㅇㄷ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -89,7 +81,7 @@ async def on_message(message):
 
 
 
-    if message.content == "/help" or message.content == "/h" or message.content == "/command" or message.content == "/도움" or message.content == "/ㄷㅇ" or message.content == "/헬프" or message.content == "/핼프" or message.content == "/ㅎㅍ" or message.content == "/커맨드" or message.content == "/ㅋㅁㄷ" or message.content == "/명령어" or message.content == "/ㅁㄹㅇ" or message.content == "/?":
+    if message.content == "/도움" or message.content == "/ㄷㅇ" or message.content == "/헬프" or message.content == "/핼프" or message.content == "/ㅎㅍ" or message.content == "/커맨드" or message.content == "/ㅋㅁㄷ" or message.content == "/명령어" or message.content == "/ㅁㄹㅇ" or message.content == "/?":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -115,7 +107,7 @@ async def on_message(message):
 
 
 
-    if message.content == "/help d" or message.content == "/hd" or message.content == "/개발용도움" or message.content == "/ㄱㅂㅇㄷㅇ" or message.content == "/개발용헬프" or message.content == "/개발용핼프" or message.content == "/ㄱㅂㅇㅎㅍ":
+    if message.content == "/개발용도움" or message.content == "/ㄱㅂㅇㄷㅇ" or message.content == "/개발용헬프" or message.content == "/개발용핼프" or message.content == "/ㄱㅂㅇㅎㅍ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -133,7 +125,7 @@ async def on_message(message):
 
 
 
-    if message.content == "/mention" or message.content == "/언급" or message.content == "/ㅇㄱ" or message.content == "/멘션" or message.content == "/ㅁㅅ":
+    if message.content == "/언급" or message.content == "/ㅇㄱ" or message.content == "/멘션" or message.content == "/ㅁㅅ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -144,7 +136,7 @@ async def on_message(message):
 
 
 
-    if message.content == "/time" or message.content == "/시간" or message.content == "/ㅅㄱ" or message.content == "/타임" or message.content == "/ㅌㅇ":
+    if message.content == "/시간" or message.content == "/ㅅㄱ" or message.content == "/타임" or message.content == "/ㅌㅇ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -171,7 +163,7 @@ async def on_message(message):
 
 
 
-    elif message.content == "/wisesaying" or message.content == "/명언" or message.content == "/ㅁㅇ":
+    if message.content == "/명언" or message.content == "/ㅁㅇ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -195,7 +187,7 @@ async def on_message(message):
 
 
 
-    if message.content == "/whoareyou" or message.content == "/봇소개" or message.content == "/ㅂㅅㄱ" or message.content == "/ㅄㄱ":
+    if message.content == "/봇소개" or message.content == "/ㅂㅅㄱ" or message.content == "/ㅄㄱ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
@@ -253,310 +245,6 @@ async def on_message(message):
     #if message.channel.id != '548548456436990003' and message.channel.id != '548548289222410241' and message.channel.id != '548548318830133278' and message.channel.id != '548571470486568960':
     if message.server.id != '548547278609317910':
         if \
-        "4r5e" in message.content or \
-        "5h1t" in message.content or \
-        "5hit" in message.content or \
-        "anal" in message.content or \
-        "anus" in message.content or \
-        "ar5e" in message.content or \
-        "arrse" in message.content or \
-        "arse" in message.content or \
-        "asses" in message.content or \
-        "assfucker" in message.content or \
-        "assfukka" in message.content or \
-        "asshole" in message.content or \
-        "asswhole" in message.content or \
-        "b00bs" in message.content or \
-        "b17ch" in message.content or \
-        "b1tch" in message.content or \
-        "ballbag" in message.content or \
-        "balls" in message.content or \
-        "ballsack" in message.content or \
-        "bastard" in message.content or \
-        "beastial" in message.content or \
-        "beastiality" in message.content or \
-        "bellend" in message.content or \
-        "bestial" in message.content or \
-        "bestiality" in message.content or \
-        "biatch" in message.content or \
-        "bitch" in message.content or \
-        "bitcher" in message.content or \
-        "bitchers" in message.content or \
-        "bitches" in message.content or \
-        "bitchin" in message.content or \
-        "bitching" in message.content or \
-        "bloody" in message.content or \
-        "blowjob" in message.content or \
-        "blowjobs" in message.content or \
-        "boiolas" in message.content or \
-        "bollock" in message.content or \
-        "bollok" in message.content or \
-        "boner" in message.content or \
-        "boob" in message.content or \
-        "booobs" in message.content or \
-        "boooobs" in message.content or \
-        "booooobs" in message.content or \
-        "booooooobs" in message.content or \
-        "breasts" in message.content or \
-        "buceta" in message.content or \
-        "bugger" in message.content or \
-        "butt" in message.content or \
-        "butthole" in message.content or \
-        "buttmuch" in message.content or \
-        "buttplug" in message.content or \
-        "c0ck" in message.content or \
-        "c0cksucker" in message.content or \
-        "cawk" in message.content or \
-        "chink" in message.content or \
-        "cipa" in message.content or \
-        "cl1t" in message.content or \
-        "clit" in message.content or \
-        "clitoris" in message.content or \
-        "clits" in message.content or \
-        "cnut" in message.content or \
-        "cock" in message.content or \
-        "cockface" in message.content or \
-        "cockhead" in message.content or \
-        "cockmunch" in message.content or \
-        "cockmuncher" in message.content or \
-        "cocks" in message.content or \
-        "cocksuck" in message.content or \
-        "cocksuka" in message.content or \
-        "cocksukka" in message.content or \
-        "cok" in message.content or \
-        "cokmuncher" in message.content or \
-        "coksucka" in message.content or \
-        "coon" in message.content or \
-        "cox" in message.content or \
-        "crap" in message.content or \
-        "cum" in message.content or \
-        "cummer" in message.content or \
-        "cumming" in message.content or \
-        "cums" in message.content or \
-        "cumshot" in message.content or \
-        "cunilingus" in message.content or \
-        "cunillingus" in message.content or \
-        "cunnilingus" in message.content or \
-        "cunt" in message.content or \
-        "cuntlick" in message.content or \
-        "cuntlicker" in message.content or \
-        "cuntlicking" in message.content or \
-        "cunts" in message.content or \
-        "cyalis" in message.content or \
-        "cyberfuc" in message.content or \
-        "d1ck" in message.content or \
-        "damn" in message.content or \
-        "dick" in message.content or \
-        "dickhead" in message.content or \
-        "dildo" in message.content or \
-        "dildos" in message.content or \
-        "dink" in message.content or \
-        "dinks" in message.content or \
-        "dirsa" in message.content or \
-        "dlck" in message.content or \
-        "doggin" in message.content or \
-        "dogging" in message.content or \
-        "donkeyribber" in message.content or \
-        "doosh" in message.content or \
-        "duche" in message.content or \
-        "dyke" in message.content or \
-        "ejaculate" in message.content or \
-        "ejaculated" in message.content or \
-        "ejaculates" in message.content or \
-        "ejaculating" in message.content or \
-        "ejaculatings" in message.content or \
-        "ejaculation" in message.content or \
-        "ejakulate" in message.content or \
-        "f4nny" in message.content or \
-        "fag" in message.content or \
-        "fagging" in message.content or \
-        "faggitt" in message.content or \
-        "faggot" in message.content or \
-        "faggs" in message.content or \
-        "fagot" in message.content or \
-        "fagots" in message.content or \
-        "fags" in message.content or \
-        "fanny" in message.content or \
-        "fannyflaps" in message.content or \
-        "fannyfucker" in message.content or \
-        "fanyy" in message.content or \
-        "fatass" in message.content or \
-        "fcuk" in message.content or \
-        "fcuker" in message.content or \
-        "fcuking" in message.content or \
-        "feck" in message.content or \
-        "fecker" in message.content or \
-        "felching" in message.content or \
-        "fellate" in message.content or \
-        "fellatio" in message.content or \
-        "flange" in message.content or \
-        "fook" in message.content or \
-        "fooker" in message.content or \
-        "fuck" in message.content or \
-        "fudgepacker" in message.content or \
-        "fuk" in message.content or \
-        "fux" in message.content or \
-        "fux0r" in message.content or \
-        "gangbang" in message.content or \
-        "gaylord" in message.content or \
-        "goatse" in message.content or \
-        "goddamn" in message.content or \
-        "goddamned" in message.content or \
-        "hell" in message.content or \
-        "heshe" in message.content or \
-        "hoar" in message.content or \
-        "hoare" in message.content or \
-        "hoer" in message.content or \
-        "homo" in message.content or \
-        "hore" in message.content or \
-        "horniest" in message.content or \
-        "horny" in message.content or \
-        "jackoff" in message.content or \
-        "jap" in message.content or \
-        "jism" in message.content or \
-        "jiz" in message.content or \
-        "jizm" in message.content or \
-        "jizz" in message.content or \
-        "kawk" in message.content or \
-        "knob" in message.content or \
-        "knobead" in message.content or \
-        "knobed" in message.content or \
-        "knobend" in message.content or \
-        "knobhead" in message.content or \
-        "knobjocky" in message.content or \
-        "knobjokey" in message.content or \
-        "kock" in message.content or \
-        "kondum" in message.content or \
-        "kondums" in message.content or \
-        "kum" in message.content or \
-        "kunilingus" in message.content or \
-        "l3i+ch" in message.content or \
-        "l3itch" in message.content or \
-        "labia" in message.content or \
-        "lmfao" in message.content or \
-        "lust" in message.content or \
-        "lusting" in message.content or \
-        "m0f0" in message.content or \
-        "m0fo" in message.content or \
-        "m45terbate" in message.content or \
-        "ma5terb8" in message.content or \
-        "ma5terbate" in message.content or \
-        "masochist" in message.content or \
-        "masterb8" in message.content or \
-        "masterbat" in message.content or \
-        "masturbate" in message.content or \
-        "mof0" in message.content or \
-        "mofo" in message.content or \
-        "mothafuck" in message.content or \
-        "motherfuck" in message.content or \
-        "muff" in message.content or \
-        "mutha" in message.content or \
-        "muthafecker" in message.content or \
-        "muthafuckker" in message.content or \
-        "muther" in message.content or \
-        "n1gga" in message.content or \
-        "n1gger" in message.content or \
-        "nazi" in message.content or \
-        "nigg3r" in message.content or \
-        "nigg4h" in message.content or \
-        "nigga" in message.content or \
-        "nob" in message.content or \
-        "numbnuts" in message.content or \
-        "nutsack" in message.content or \
-        "orgasim" in message.content or \
-        "orgasims" in message.content or \
-        "orgasm" in message.content or \
-        "orgasms" in message.content or \
-        "p0rn" in message.content or \
-        "pawn" in message.content or \
-        "pecker" in message.content or \
-        "penis" in message.content or \
-        "penisfucker" in message.content or \
-        "phuck" in message.content or \
-        "phuk" in message.content or \
-        "phuked" in message.content or \
-        "phuking" in message.content or \
-        "phukked" in message.content or \
-        "phukking" in message.content or \
-        "phuks" in message.content or \
-        "phuq" in message.content or \
-        "pigfucker" in message.content or \
-        "pimpis" in message.content or \
-        "piss" in message.content or \
-        "pissed" in message.content or \
-        "pisser" in message.content or \
-        "pisses" in message.content or \
-        "pissflaps" in message.content or \
-        "pissin" in message.content or \
-        "pissing" in message.content or \
-        "pissoff" in message.content or \
-        "poop" in message.content or \
-        "porn" in message.content or \
-        "porno" in message.content or \
-        "pornos" in message.content or \
-        "prick" in message.content or \
-        "pricks" in message.content or \
-        "pron" in message.content or \
-        "pube" in message.content or \
-        "pusse" in message.content or \
-        "pussi" in message.content or \
-        "pussies" in message.content or \
-        "pussy" in message.content or \
-        "pussys" in message.content or \
-        "rectum" in message.content or \
-        "retard" in message.content or \
-        "rimjaw" in message.content or \
-        "rimming" in message.content or \
-        "sadist" in message.content or \
-        "schlong" in message.content or \
-        "screwing" in message.content or \
-        "scroat" in message.content or \
-        "scrote" in message.content or \
-        "scrotum" in message.content or \
-        "semen" in message.content or \
-        "sex" in message.content or \
-        "sh1t" in message.content or \
-        "shag" in message.content or \
-        "shagger" in message.content or \
-        "shaggin" in message.content or \
-        "shagging" in message.content or \
-        "shemale" in message.content or \
-        "shit" in message.content or \
-        "skank" in message.content or \
-        "slut" in message.content or \
-        "sluts" in message.content or \
-        "smegma" in message.content or \
-        "smut" in message.content or \
-        "snatch" in message.content or \
-        "spac" in message.content or \
-        "spunk" in message.content or \
-        "t1tt1e5" in message.content or \
-        "t1tties" in message.content or \
-        "teets" in message.content or \
-        "teez" in message.content or \
-        "testical" in message.content or \
-        "testicle" in message.content or \
-        "tit" in message.content or \
-        "tosser" in message.content or \
-        "turd" in message.content or \
-        "tw4t" in message.content or \
-        "twat" in message.content or \
-        "twunt" in message.content or \
-        "twunter" in message.content or \
-        "v14gra" in message.content or \
-        "v1gra" in message.content or \
-        "vagina" in message.content or \
-        "viagra" in message.content or \
-        "vulva" in message.content or \
-        "w00se" in message.content or \
-        "wang" in message.content or \
-        "wank" in message.content or \
-        "wanker" in message.content or \
-        "wanky" in message.content or \
-        "whore" in message.content or \
-        "willies" in message.content or \
-        "willy" in message.content or \
-        "xrated" in message.content or \
         "10새" in message.content or \
         "10새기" in message.content or \
         "10새리" in message.content or \
