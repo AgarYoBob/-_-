@@ -212,7 +212,7 @@ async def on_message(message):
             embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
             await client.send_message(client.get_channel('548548318830133278'), embed=embed)
         if message.content.startswith('.argument '):
-            embed = discord.Embed(title="재판에 올려진 플레이어가 결정되었습니다." , description="재판에 올려진 <@" + message.content[10:] + ">님은 변론을 해주세요.", color=0x8000ff)
+            embed = discord.Embed(title="재판에 올려질 플레이어가 결정되었습니다." , description="재판에 올려진 <@" + message.content[10:] + ">님은 변론을 해주세요.", color=0x8000ff)
             embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
             await client.send_message(client.get_channel('548548318830133278'), embed=embed)
         if message.content == ".vote2":
