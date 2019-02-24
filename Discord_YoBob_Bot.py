@@ -232,7 +232,8 @@ async def on_message(message):
             await client.send_message(client.get_channel('548548289222410241'), embed=embed)
 
 
-        if message.author.id == '150577293981515776':
+    if message.author.id == '150577293981515776':
+
         if message.content.startswith('/r '):
             await client.send_message(message.channel, message.content[3:])
 
