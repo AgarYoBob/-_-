@@ -29,6 +29,11 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if message.channel.id != '542335761962237972' and message.channel.id != '542335831675764736':
+        now = datetime.datetime.now()
+
+
+
     if message.content == "/게임" or message.content == "/ㄱㅇ" or message.content == "/겜" or message.content == "/ㄱ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
