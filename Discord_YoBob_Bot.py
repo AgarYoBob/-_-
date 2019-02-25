@@ -53,14 +53,55 @@ async def on_message(message):
         await client.send_message(message.channel, embed=embed)
 
 
+    if message.content == "/경고기록" or message.content == "/ㄱㄱㄱㄹ" or message.content == "/경고조회" or message.content == "/ㄱㄱㅈㅎ":
+        embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
+        embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+        await client.send_message(client.get_channel('542335831675764736'), embed=embed)
+        file = openpyxl.load_workbook("warning_list.xlsx")
+        sheet = file.active
+        for i in range(1, 129):
+            if str(sheet["B" + str(i)].value) == str(message.author.id):
+                embed = discord.Embed(title="경고 기록" , description="현재 <@" + message.author.id + ">님의 경고 횟수는 " + str(sheet["C" + str(i)].value) + "회 입니다.", color=0x00ff00)
+                embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+                await client.send_message(message.channel, embed=embed)
+                break
+            if str(sheet["B" + str(i)].value) == "-":
+                sheet["A" + str(i)].value = str(message.author.name)
+                sheet["B" + str(i)].value = str(message.author.id)
+                sheet["C" + str(i)].value = "0"
+                embed = discord.Embed(title="경고 기록" , description="현재 <@" + message.author.id + ">님의 경고 횟수는 " + str(sheet["C" + str(i)].value) + "회 입니다.", color=0x00ff00)
+                embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+                await client.send_message(message.channel, embed=embed)
+                break
+        file.save("warning_list.xlsx")
 
+    elif message.content.startswith('/경고기록 ') or message.content.startswith('/ㄱㄱㄱㄹ ') or message.content.startswith('/경고조회 ') or message.content.startswith('/ㄱㄱㅈㅎ '):
+        embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
+        embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+        await client.send_message(client.get_channel('542335831675764736'), embed=embed)
+        warnhistory = message.content[6:]
+        file = openpyxl.load_workbook("warning_list.xlsx")
+        sheet = file.active
+        for i in range(1, 129):
+            if str(sheet["B" + str(i)].value) == str(warnhistory):
+                embed = discord.Embed(title="경고 기록" , description="현재 <@" + warnhistory + ">님의 경고 횟수는 " + str(sheet["C" + str(i)].value) + "회 입니다.", color=0x00ff00)
+                embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+                await client.send_message(message.channel, embed=embed)
+                break
+            if str(sheet["B" + str(i)].value) == "-":
+                embed = discord.Embed(title="오류" , description="<@" + warnhistory + ">님의 경고 기록이 없거나 찾을 수 없습니다.", color=0x00ff00)
+                embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+                await client.send_message(message.channel, embed=embed)
+                break
+        file.save("warning_list.xlsx")
+
+
+        
     if message.content == "/변경사항" or message.content == "/ㅂㄳㅎ" or message.content == "/ㅂㄱㅅㅎ" or message.content == "/체인지로그" or message.content == "/ㅊㅇㅈㄺ" or message.content == "/ㅊㅇㅈㄹㄱ":
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [uthor]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
-        embed = discord.Embed(title="1.3.0 변경 사항", description="``.vote1``, ``.vote2``, ``.daytime``, ``.night`` 명령어를 추가하였습니다.", color=0x0000ff)
+        embed = discord.Embed(title="1.4.0 변경 사항", description="``/경고기록`` 및 ``/경고조회`` 명령어를 추가하였습니다.", color=0x00ff00)
         await client.send_message(message.channel, embed=embed)
 
 
@@ -79,8 +120,6 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [Author]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
         embed = discord.Embed(title="En Taro Adun!", description="엙 타로 아둔!", color=0x00ff00)
         await client.send_message(message.channel, embed=embed)
 
@@ -90,23 +129,22 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [Author]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
         embed = discord.Embed(title="사용 가능한 명령어", description="\n"
-                                                              "``/?`` ``/도움`` ``/헬프`` ``/핼프`` ``/커맨드`` ``/명령어`` ``/help`` ``/h`` ``/command``\n사용 가능한 명령어 목록을 보여줍니다.\n\n"
-                                                              "``/개발용도움`` ``/개발용헬프`` ``/개발용핼프`` ``/help d`` ``/hd``\n개발용 명령어 목록을 보여줍니다.\n\n"
-                                                              "``/검색 (텍스트)`` ``/서치 (텍스트)`` ``/search (텍스트)``\nGoogle에서 이미지를 불러옵니다. (텍스트)에 공백이 없어야 정상 작동합니다.\n\n"
-                                                              "``/게임`` ``/겜`` ``/game`` ``/g``\n~~현재 게임 점수를 보여줍니다.~~ **Sleep 상태에서 제한 됨.**\n\n"
-                                                              "``/게임 가위바위보`` ``/겜 가위바위보`` ``/game rps`` ``/g rps``\n~~가위바위보 게임을 진행합니다.~~ **Sleep 상태에서 제한 됨.**\n\n"
-                                                              "``/게임 주사위`` ``/게임 다이스`` ``/겜 주사위`` ``/겜 다이스`` ``/game dice`` ``/g dice``\n~~주사위를 굴립니다.~~ **Sleep 상태에서 제한 됨.**\n\n"
-                                                              "``/경고기록 (유저 ID)`` ``/경고조회 (유저 ID)`` ``/warn (유저 ID)``\n~~(유저 ID)의 경고 기록을 조회합니다.~~ **개발중인 항목**\n\n"
-                                                              "``/명언`` ``/wisesaying``\n명언을 남깁니다.\n\n"
-                                                              "``/변경사항`` ``/체인지로그`` ``/changelog`` ``/cl``\n최근 변경 사항을 보여줍니다.\n\n"
-                                                              "``/봇소개`` ``/whoareyou``\n봇의 소개를 보여줍니다.\n\n"
-                                                              "``/시간`` ``/타임`` ``/time``\n현재 시간을 보여줍니다.\n\n"
-                                                              "``/언급`` ``/멘션`` ``/mention``\n명령어를 사용한 유저에게 언급합니다.\n\n"
-                                                              "``/엔타로아둔`` ``/entaroadun``\n인사를 합니다.\n\n"
-                                                              "```ini\n[ 한글 명령어는 초성으로도 사용 가능합니다. (검색 제외) ]\n```\n\n"
+                                                              "``/?`` ``/도움`` ``/헬프`` ``/핼프`` ``/커맨드`` ``/명령어``\n사용 가능한 명령어 목록을 보여줍니다.\n\n"
+                                                              "``/개발용도움`` ``/개발용헬프`` ``/개발용핼프``\n개발용 명령어 목록을 보여줍니다.\n\n"
+                                                              "``/검색 (텍스트)`` ``/서치 (텍스트)``\nGoogle에서 이미지를 불러옵니다. (텍스트)에 공백이 없어야 정상 작동합니다.\n\n"
+                                                              "``/게임`` ``/겜``\n~~현재 자신의 게임 점수를 보여줍니다.~~ **Sleep 상태에서 사용 불가**\n\n"
+                                                              "``/게임 가위바위보`` ``/겜 가위바위보``\n~~가위바위보 게임을 진행합니다.~~ **Sleep 상태에서 사용 불가**\n\n"
+                                                              "``/게임 주사위`` ``/게임 다이스`` ``/겜 주사위`` ``/겜 다이스``\n~~주사위를 굴립니다.~~ **Sleep 상태에서 사용 불가**\n\n"
+                                                              "``/경고기록`` ``/경고조회``\n자신의 경고 기록을 조회합니다.\n\n"
+                                                              "``/경고기록 (유저 ID)`` ``/경고조회 (유저ID)``\n(유저 ID)의 경고 기록을 조회합니다.\n\n"
+                                                              "``/명언``\n명언을 남깁니다.\n\n"
+                                                              "``/변경사항`` ``/체인지로그``\n최근 변경 사항을 보여줍니다.\n\n"
+                                                              "``/봇소개``\n봇의 소개를 보여줍니다.\n\n"
+                                                              "``/시간`` ``/타임``\n현재 시간을 보여줍니다.\n\n"
+                                                              "``/언급`` ``/멘션``\n명령어를 사용한 유저에게 언급합니다.\n\n"
+                                                              "``/엔타로아둔``\n인사를 합니다.\n\n"
+                                                              "```ini\n[ 이 명령어들은 초성으로도 사용 가능합니다. ]\n```\n\n"
                                                               , color=0x00ff00)
         await client.send_message(message.channel, embed=embed)
 
@@ -116,8 +154,6 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [Author]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
         embed = discord.Embed(title="개발용 명령어", description="\n"
                                                               "``/r (텍스트)``\n(텍스트)를 봇이 따라합니다. 세부 사항은 소스 코드를 참조하세요.\n\n"
                                                               "``/v``\n현재 버전을 확인합니다.\n\n"
@@ -134,8 +170,6 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [Author]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
         embed = discord.Embed(title="내가 너를 멘션하겠노라.", description="<@" + message.author.id + ">", color=0x00ff00)
         await client.send_message(message.channel, embed=embed)
 
@@ -145,8 +179,6 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [Author]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
         embed = discord.Embed(title="현재 시각", description="", color=0x00ff00)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(message.channel, embed=embed)
@@ -157,8 +189,6 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [Author]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
         group = message.content.split(" ")[1]
         google_data = requests.get("https://google.co.kr/search?q=" + group + "&dcr=0&source=lnms&tbm=isch&sa=X")
         soup = bs(google_data.text, "html.parser")
@@ -172,8 +202,6 @@ async def on_message(message):
         embed = discord.Embed(title="명령어 사용이 감지되었습니다.", description=message.author.name + " (<@" + message.author.id + ">)\n#" + message.channel.name + " (<#" + message.channel.id + ">)\n**" + message.content + "**", color=0x0000ff)
         embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
         await client.send_message(client.get_channel('542335831675764736'), embed=embed)
-        file = open('log.txt', 'a', encoding='UTF-8')
-        file.write('\n   \n[Channel]: %s(%s) | [Author]: %s(%s) | [Message]:\n%s' % (message.channel, message.channel.id, message.author.name, message.author.id, message.content))
         embed = discord.Embed(title="알림", description="9.9148542초 이내에 채팅을 입력해주세요.", color=0x00ff00)
         await client.send_message(message.channel, embed=embed)
         wisesay = await client.wait_for_message(timeout=10, author=message.author)
@@ -213,7 +241,7 @@ async def on_message(message):
             embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
             await client.send_message(client.get_channel('548548318830133278'), embed=embed)
         if message.content == ".vote2":
-            embed = discord.Embed(title="2차 투표가 시작되었습니다." , description="재판에 올려진 플레이어에 대해 찬반 투표를 해주세요.", color=0x8000ff)
+            embed = discord.Embed(title="2차 투표가 시작되었습니다." , description="재판에 올려진 플레이어에 대해 찬반 투표를 해주세요.\n투표는 **찬성**, **반대**, **기권**을 하실 수 있습니다.", color=0x8000ff)
             embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
             member = discord.utils.get(client.get_all_members())
             vote2 = await client.send_message(client.get_channel('548548318830133278'), embed=embed)
@@ -224,7 +252,7 @@ async def on_message(message):
             embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
             await client.send_message(client.get_channel('548548289222410241'), embed=embed)
         if message.content.startswith('.night '):
-            embed = discord.Embed(title=message.content[7:] + "번째 밤이 되었습니다." , description="이제 생존한 플레이어는 <#548548289222410241> 채널을 사용할 수 없습니다.", color=0x0691fa)
+            embed = discord.Embed(title=message.content[7:] + "번째 밤이 되었습니다." , description="이제 생존한 플레이어는 <#548548289222410241> 채널을 사용할 수 없습니다.\n(가능한 경우) 자신의 역할 채널에서 능력을 사용해주세요.", color=0x0691fa)
             embed.set_footer(text=str(now.year) + "년 " + str(now.month) + "월 " + str(now.day) + "일 | " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
             await client.send_message(client.get_channel('548548289222410241'), embed=embed)
 
@@ -244,7 +272,7 @@ async def on_message(message):
             await client.send_message(client.get_channel('548548289222410241'), message.content[3:])
 
         if message.content == "/v":
-            await client.send_message(message.channel, "현재 버전은 ``1.3.3.0002 (r:46-190224)``입니다.")
+            await client.send_message(message.channel, "현재 버전은 ``1.4.0.0000 (r:47-190225)``입니다.")
         
    
     #if message.channel.id != '548548456436990003' and message.channel.id != '548548289222410241' and message.channel.id != '548548318830133278' and message.channel.id != '548571470486568960':
